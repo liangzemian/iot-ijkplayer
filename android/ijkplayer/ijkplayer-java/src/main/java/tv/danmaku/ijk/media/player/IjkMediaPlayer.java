@@ -1045,7 +1045,12 @@ public final class IjkMediaPlayer extends AbstractMediaPlayer {
                 return;
             case MEDIA_SET_VIDEO_SEI:
                 if (msg.obj != null) {
-                    player.notifyOnInfoSEI(msg.arg1, msg.arg2, (String)msg.obj);
+                    if (msg.obj instanceof byte[]) {
+                        byte[] byteArray = (byte[]) msg.obj;
+                        String text = new String(byteArray);
+                        // 处理字符串
+                        player.notifyOnInfoSEI(msg.arg1, msg.arg2, text);
+                    }
                 }
                 break;
 
