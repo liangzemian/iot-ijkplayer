@@ -146,6 +146,9 @@ public class AndroidMediaPlayer extends AbstractMediaPlayer {
     @Override
     public void flushCache() {}
 
+    @Override
+    public void setMediaCodecFlags(int flags) {}
+
     @TargetApi(Build.VERSION_CODES.M)
     private static class MediaDataSourceProxy extends MediaDataSource {
         private final IMediaDataSource mMediaDataSource;

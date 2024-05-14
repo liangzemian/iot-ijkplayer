@@ -1317,4 +1317,6 @@ public final class IjkMediaPlayer extends AbstractMediaPlayer {
     public native void setMaxPacketNum(int num);
     @Override
     public native void flushCache();
+    @Override
+    public native void setMediaCodecFlags(int flags);
 }

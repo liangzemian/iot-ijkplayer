@@ -222,4 +222,5 @@ public interface IMediaPlayer {
     void setFrameSpeed(float speed);
     void setMaxPacketNum(int num);
     void flushCache();
+    void setMediaCodecFlags(int flags);
 }

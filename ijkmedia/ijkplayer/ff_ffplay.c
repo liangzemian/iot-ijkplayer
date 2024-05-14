@@ -5476,6 +5476,10 @@ void ffp_flush_player_cache(FFPlayer *ffp) {
             }
 }
 
+void ffp_set_mediacodec_flags(FFPlayer *ffp, int flags) {
+    ffp->mediacodec_flags = flags;
+}
+
 uint32_t convert_hex_to_decimal(uint8_t *hex_data) {
     uint32_t decimal_value = 0;
     for (int i = 0; i < 4; i++) {

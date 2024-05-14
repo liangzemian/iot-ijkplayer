@@ -271,7 +271,7 @@ fail:
     return -1;
 }
 
-static int reconfigure_codec_l(JNIEnv *env, IJKFF_Pipenode *node, jobject new_surface)
+static int reconfigure_codec_l(JNIEnv *env, IJKFF_Pipenode *node, jobject new_surface, int flags)
 {
     IJKFF_Pipenode_Opaque *opaque   = node->opaque;
     int                    ret      = 0;
@@ -321,7 +321,8 @@ static int reconfigure_codec_l(JNIEnv *env, IJKFF_Pipenode *node, jobject new_su
         assert(opaque->weak_vout);
     }
 
-    amc_ret = SDL_AMediaCodec_configure_surface(env, opaque->acodec, opaque->input_aformat, opaque->jsurface, NULL, 0);
+    ALOGI("SDL_AMediaCodec_configure_surface: %d\n", flags);
+    amc_ret = SDL_AMediaCodec_configure_surface(env, opaque->acodec, opaque->input_aformat, opaque->jsurface, NULL, flags);
     if (amc_ret != SDL_AMEDIA_OK) {
         ALOGE("%s:configure_surface: failed\n", __func__);
         ret = -1;
@@ -413,7 +414,7 @@ static int reconfigure_codec(JNIEnv *env, IJKFF_Pipenode *node)
 {
     IJKFF_Pipenode_Opaque *opaque = node->opaque;
     SDL_LockMutex(opaque->acodec_mutex);
-    int ret = reconfigure_codec_l(env, node);
+    int ret = reconfigure_codec_l(env, node, 0);
     SDL_UnlockMutex(opaque->acodec_mutex);
     return ret;
 }
@@ -612,7 +613,7 @@ static int feed_input_buffer2(JNIEnv *env, IJKFF_Pipenode *node, int64_t timeUs,
                     opaque->aformat_need_recreate = false;
                 }
 
-                ret = reconfigure_codec_l(env, node, new_surface);
+                ret = reconfigure_codec_l(env, node, new_surface, 0);
 
                 J4A_DeleteGlobalRef__p(env, &new_surface);
 
@@ -911,7 +912,7 @@ static int feed_input_buffer(JNIEnv *env, IJKFF_Pipenode *node, int64_t timeUs, 
 
                 opaque->acodec_reconfigure_request = true;
                 SDL_LockMutex(opaque->acodec_mutex);
-                ret = reconfigure_codec_l(env, node, new_surface);
+                ret = reconfigure_codec_l(env, node, new_surface, 0);
                 opaque->acodec_reconfigure_request = false;
                 SDL_CondSignal(opaque->acodec_cond);
                 SDL_UnlockMutex(opaque->acodec_mutex);
@@ -2060,7 +2061,7 @@ IJKFF_Pipenode *ffpipenode_create_video_decoder_from_android_mediacodec(FFPlayer
     }
 
     jsurface = ffpipeline_get_surface_as_global_ref(env, pipeline);
-    ret = reconfigure_codec_l(env, node, jsurface);
+    ret = reconfigure_codec_l(env, node, jsurface, ffp->mediacodec_flags);
     J4A_DeleteGlobalRef__p(env, &jsurface);
     if (ret != 0)
         goto fail;

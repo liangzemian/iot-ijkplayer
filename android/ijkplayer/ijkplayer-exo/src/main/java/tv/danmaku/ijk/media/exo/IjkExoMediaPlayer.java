@@ -99,6 +99,9 @@ public class IjkExoMediaPlayer extends AbstractMediaPlayer {
 
     @Override
     public void flushCache() {}
+
+    @Override
+    public void setMediaCodecFlags(int flags) {}
     
     @Override
     public void setDataSource(Context context, Uri uri) {

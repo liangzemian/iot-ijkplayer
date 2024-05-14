@@ -457,6 +457,19 @@ LABEL_RETURN:
 }
 
 static void
+IjkMediaPlayer_setMediaCodecFlags(JNIEnv *env, jobject thiz, jint value)
+{
+    IjkMediaPlayer *mp = jni_get_media_player(env, thiz);
+    JNI_CHECK_GOTO(mp, env, NULL, "mpjni: setMediaCodecFlags: null mp", LABEL_RETURN);
+
+    ijkmp_set_mediacodec_flags(mp, value);
+
+    LABEL_RETURN:
+    ijkmp_dec_ref_p(&mp);
+    return;
+}
+
+static void
 IjkMediaPlayer_release(JNIEnv *env, jobject thiz)
 {
     MPTRACE("%s\n", __func__);
@@ -1274,6 +1287,7 @@ static JNINativeMethod g_methods[] = {
 
     { "setFrameSpeed",          "(F)V",     (void *) IjkMediaPlayer_setFrameSpeed },
     { "setMaxPacketNum",        "(I)V",     (void *) IjkMediaPlayer_setMaxPacketNum },
+    { "setMediaCodecFlags",     "(I)V",     (void *) IjkMediaPlayer_setMediaCodecFlags },
     { "_release",               "()V",      (void *) IjkMediaPlayer_release },
     { "_reset",                 "()V",      (void *) IjkMediaPlayer_reset },
     { "setVolume",              "(FF)V",    (void *) IjkMediaPlayer_setVolume },

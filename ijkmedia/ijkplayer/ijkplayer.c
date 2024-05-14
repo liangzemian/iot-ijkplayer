@@ -859,3 +859,11 @@ void ijkmp_flush_cache(IjkMediaPlayer *mp)
     ffp_flush_player_cache(mp->ffplayer);
     pthread_mutex_unlock(&mp->mutex);
 }
+
+void ijkmp_set_mediacodec_flags(IjkMediaPlayer *mp, int flags) {
+    assert(mp);
+    MPTRACE("ijkmp_set_mediacodec_flags()\n");
+    pthread_mutex_lock(&mp->mutex);
+    ffp_set_mediacodec_flags(mp->ffplayer, flags);
+    pthread_mutex_unlock(&mp->mutex);
+}

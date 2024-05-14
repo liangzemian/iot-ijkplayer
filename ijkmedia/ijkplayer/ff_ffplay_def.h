@@ -736,6 +736,7 @@ typedef struct FFPlayer {
     int64_t start_dts;                  // 开始录制时dts
     float audio_speed;                    //追帧速度
     int packet_max_num;                    //追帧包大小
+    int mediacodec_flags;                  //mediacodec的flags
 } FFPlayer;
 
 #define fftime_to_milliseconds(ts) (av_rescale(ts, 1000, AV_TIME_BASE))
