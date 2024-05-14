@@ -1023,9 +1023,12 @@ static void message_loop_n(JNIEnv *env, IjkMediaPlayer *mp)
         case FFP_MSG_VIDEO_SEI:
             MPTRACE("FFP_MSG_VIDEO_SEI: %s\n", msg.obj);
             if (msg.obj) {
-                jstring text = (*env)->NewStringUTF(env, (char *)msg.obj);
-                post_event2(env, weak_thiz, MEDIA_SET_VIDEO_SEI, 0, 0, text);
-                J4A_DeleteLocalRef__p(env, &text);
+                const char* text = (const char*) msg.obj;
+                jsize textLength = strlen(text);
+                jbyteArray byteArray = (*env)->NewByteArray(env, textLength);
+                (*env)->SetByteArrayRegion(env, byteArray, 0, textLength, (const jbyte*) text);
+                post_event2(env, weak_thiz, MEDIA_SET_VIDEO_SEI, 0, 0, byteArray);
+                (*env)->DeleteLocalRef(env, byteArray);
             }
             break;
         case FFP_MSG_PCM_DATA:
