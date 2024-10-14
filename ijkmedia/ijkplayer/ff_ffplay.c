@@ -1290,6 +1290,22 @@ static void check_external_clock_speed(VideoState *is, FFPlayer *ffp) {
                     set_clock_speed(&is->extclk, 1);
                 }
             }
+        }else{
+            
+            
+            if (is->videoq.nb_packets > EXTERNAL_CLOCK_MAX_FRAMES) {
+                double speed = is->extclk.speed;
+                if (speed == 1.0) {
+                    set_clock_speed(&is->extclk, ffp->audio_speed);
+                }
+//                printf("speeddddddd===5mjpeg===packets===>%d==>%f===>%f\n",is->videoq.nb_packets,speed, ffp->audio_speed);
+            }else if (is->videoq.nb_packets < EXTERNAL_CLOCK_MIN_FRAMES){
+                double speed = is->extclk.speed;
+                if (speed != 1.0) {
+                    set_clock_speed(&is->extclk, 1);
+                }
+//                printf("speeddddddd===6mjpeg===packets===>%d==>%f\n",is->videoq.nb_packets,speed);
+            }
         }
     }
 }
