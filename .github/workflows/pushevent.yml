@@ -36,7 +36,7 @@ jobs:
         PROVISIONING_PASSWORD: ${{ secrets.GPG_DECRYPT_PASSPHRASE }}
         
     - name: Upload NETSDK Library
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: IJKMediaFramework.framework
         path: ios/IJKMediaPlayer/iot-thirdparty-ios/Source/IJKPlayer-iOS/IJKMediaFramework.framework
