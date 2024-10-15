@@ -1290,22 +1290,6 @@ static void check_external_clock_speed(VideoState *is, FFPlayer *ffp) {
                     set_clock_speed(&is->extclk, 1);
                 }
             }
-        }else{
-            
-            
-            if (is->videoq.nb_packets > EXTERNAL_CLOCK_MAX_FRAMES) {
-                double speed = is->extclk.speed;
-                if (speed == 1.0) {
-                    set_clock_speed(&is->extclk, ffp->audio_speed);
-                }
-//                printf("speeddddddd===5mjpeg===packets===>%d==>%f===>%f\n",is->videoq.nb_packets,speed, ffp->audio_speed);
-            }else if (is->videoq.nb_packets < EXTERNAL_CLOCK_MIN_FRAMES){
-                double speed = is->extclk.speed;
-                if (speed != 1.0) {
-                    set_clock_speed(&is->extclk, 1);
-                }
-//                printf("speeddddddd===6mjpeg===packets===>%d==>%f\n",is->videoq.nb_packets,speed);
-            }
         }
     }
 }
@@ -3379,7 +3363,9 @@ static int read_thread(void *arg)
     }
 
     is->realtime = is_realtime(ic, ffp->packet_buffering);
-
+    av_dict_set_int(&ic->metadata, "packet-buffering", ffp->packet_buffering, 0);
+//    printf("av_dict_set_int_packet-buffering111===>%d",ffp->packet_buffering);
+    
     av_dump_format(ic, 0, is->filename, 0);
 
     int video_stream_count = 0;
