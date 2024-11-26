@@ -3433,6 +3433,7 @@ static int read_thread(void *arg)
         is->av_sync_type  = ffp->av_sync_type;
     }
     if (ffp->packet_max_num == 10001) {
+        ffp->av_sync_type = AV_SYNC_EXTERNAL_CLOCK;
         is->av_sync_type = AV_SYNC_EXTERNAL_CLOCK;
     }
 
