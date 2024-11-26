@@ -3432,6 +3432,9 @@ static int read_thread(void *arg)
         ffp->av_sync_type = AV_SYNC_EXTERNAL_CLOCK;
         is->av_sync_type  = ffp->av_sync_type;
     }
+    if (ffp->packet_max_num == 10001) {
+        is->av_sync_type = AV_SYNC_EXTERNAL_CLOCK;
+    }
 
     ret = -1;
     if (st_index[AVMEDIA_TYPE_VIDEO] >= 0) {
