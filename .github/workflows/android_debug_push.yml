@@ -45,6 +45,16 @@ jobs:
       - name: AAR Path
         run: |
           ls -l android/ijkplayer/ijkplayer-armv7a
+      - name: AAR Path
+        run: |
+          ls -l android/ijkplayer/ijkplayer-armv7a/build
+      - name: AAR Path
+        run: |
+          ls -l android/ijkplayer/ijkplayer-armv7a/build/outputs
+      - name: AAR Path
+        run: |
+          ls -l android/ijkplayer/ijkplayer-armv7a/build/outputs/aar
+     
       # - name: Create Release
       #   id: create_release
       #   uses: actions/create-release@v1
