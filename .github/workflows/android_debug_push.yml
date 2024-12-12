@@ -25,17 +25,17 @@ jobs:
         with:
           distribution: temurin
           java-version: 11    
-      - name: Download r10e NDK
+      - name: Download r12b NDK
         run: |
-          wget https://dl.google.com/android/repository/android-ndk-r10e-darwin-x86_64.zip
-          unzip android-ndk-r10e-darwin-x86_64.zip
+          wget https://dl.google.com/android/repository/android-ndk-r12b-darwin-x86_64.zip
+          unzip android-ndk-r12b-darwin-x86_64.zip
       - name: Update SDK Version
         run: bash .github/script/updateVersionForSnapshot.sh
       - name: Build with Gradle
         run: |
-          ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r10e
-          export ANDROID_NDK=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r10e
-          export ANDROID_NDK_ROOT=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r10e
+          ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
+          export ANDROID_NDK=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
+          export ANDROID_NDK_ROOT=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
 
           sh .github/script/build_armv7a.sh
           cd android/ijkplayer
