@@ -57,13 +57,26 @@ jobs:
       - name: Upload AAR files
         uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          tag_name: ${{ github.ref_name }}
           files: |
             android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
             android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
             android/ijkplayer/ijkplayer-java/build/outputs/aar/ijkplayer-java-release.aar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # - name: Upload AAR files
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     files: |
+      #       android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
+      #       android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
+      #       android/ijkplayer/ijkplayer-java/build/outputs/aar/ijkplayer-java-release.aar
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+          
       # - name: AAR Path
       #   run: |
       #     ls -l android/ijkplayer/ijkplayer-armv7a
