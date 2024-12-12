@@ -42,9 +42,42 @@ jobs:
           ./gradlew :ijkplayer-armv7a:assemble
           ./gradlew :ijkplayer-arm64:assemble
           ./gradlew :ijkplayer-java:assemble
-      - name: Publish aar to Maven
-        run: |
-          cd android/ijkplayer
-          ./gradlew :ijkplayer-armv7a:publish
-          ./gradlew :ijkplayer-arm64:publish
-          ./gradlew :ijkplayer-java:publish
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: v1.0.0
+          release_name: Release v1.0.0
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload AAR files
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
+          asset_name: ijkplayer-armv7a-release.aar
+          asset_content_type: application/aar
+      - name: Upload AAR files for arm64
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
+          asset_name: ijkplayer-arm64-release.aar
+          asset_content_type: application/aar
+      - name: Upload AAR files for java
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: android/ijkplayer/ijkplayer-java/build/outputs/aar/ijkplayer-java-release.aar
+          asset_name: ijkplayer-java-release.aar
+          asset_content_type: application/aar
+          
+      # - name: Publish aar to Maven
+      #   run: |
+      #     cd android/ijkplayer
+      #     ./gradlew :ijkplayer-armv7a:publish
+      #     ./gradlew :ijkplayer-arm64:publish
+      #     ./gradlew :ijkplayer-java:publish
