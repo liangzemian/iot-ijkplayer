@@ -44,7 +44,7 @@ jobs:
           ./gradlew :ijkplayer-java:assemble
       - name: AAR Path
         run: |
-          ls -l android/ijkplayer
+          ls -l android/ijkplayer/ijkplayer-armv7a
       # - name: Create Release
       #   id: create_release
       #   uses: actions/create-release@v1
