@@ -42,18 +42,40 @@ jobs:
           ./gradlew :ijkplayer-armv7a:assemble
           ./gradlew :ijkplayer-arm64:assemble
           ./gradlew :ijkplayer-java:assemble
-      - name: AAR Path
-        run: |
-          ls -l android/ijkplayer/ijkplayer-armv7a
-      - name: AAR Path
-        run: |
-          ls -l android/ijkplayer/ijkplayer-armv7a/build
-      - name: AAR Path
-        run: |
-          ls -l android/ijkplayer/ijkplayer-armv7a/build/outputs
-      - name: AAR Path
-        run: |
-          ls -l android/ijkplayer/ijkplayer-armv7a/build/outputs/aar
+          
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload AAR files
+        uses: softprops/action-gh-release@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset: |
+            android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
+            android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
+            android/ijkplayer/ijkplayer-java/build/outputs/aar/ijkplayer-java-release.aar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}    
+      # - name: AAR Path
+      #   run: |
+      #     ls -l android/ijkplayer/ijkplayer-armv7a
+      # - name: AAR Path
+      #   run: |
+      #     ls -l android/ijkplayer/ijkplayer-armv7a/build
+      # - name: AAR Path
+      #   run: |
+      #     ls -l android/ijkplayer/ijkplayer-armv7a/build/outputs
+      # - name: AAR Path
+      #   run: |
+      #     ls -l android/ijkplayer/ijkplayer-armv7a/build/outputs/aar
      
       # - name: Create Release
       #   id: create_release
