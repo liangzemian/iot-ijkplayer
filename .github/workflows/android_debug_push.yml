@@ -33,7 +33,7 @@ jobs:
         run: bash .github/script/updateVersionForSnapshot.sh
       - name: Update awk
         run: |
-          rm /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b/prebuilt/darwin-x86_64/awk
+          rm /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b/prebuilt/darwin-x86_64/bin/awk
           brew install awk
           ndk-build -v
       - name: Build with Gradle
