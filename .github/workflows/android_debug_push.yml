@@ -35,7 +35,7 @@ jobs:
         run: |
           rm /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b/prebuilt/darwin-x86_64/bin/awk
           brew install awk
-          ndk-build -v
+          # ndk-build -v
       - name: Build with Gradle
         run: |
           ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
