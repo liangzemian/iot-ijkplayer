@@ -3261,7 +3261,11 @@ static int read_thread(void *arg)
         av_dict_set_int(&ffp->format_opts, "skip-calc-frame-rate", ffp->skip_calc_frame_rate, 0);
     }
 
-    if (ffp->iformat_name)
+    if (strncmp(is->filename, "webrtc://", 9) == 0) {
+	 extern AVInputFormat ff_webrtc_demuxer;
+	 av_register_input_format(&ff_webrtc_demuxer);
+	 is->iformat = &ff_webrtc_demuxer;
+    } else if (ffp->iformat_name)  
         is->iformat = av_find_input_format(ffp->iformat_name);
  
     if (ffp->is_manifest) {
