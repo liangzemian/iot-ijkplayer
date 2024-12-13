@@ -1,8 +1,12 @@
 name: IOT IJK ANDROID RELEASE CI
 
 on:
-  release:
-    types: [published]
+  # release:
+  #   types: [published]
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
 
 env:
   IOT_SONATYPE_USERNAME: ${{ secrets.IOT_SONATYPE_USERNAME }}
