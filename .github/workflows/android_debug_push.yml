@@ -31,6 +31,11 @@ jobs:
           unzip android-ndk-r12b-darwin-x86_64.zip
       - name: Update SDK Version
         run: bash .github/script/updateVersionForSnapshot.sh
+      - name: Update awk
+        run: |
+          rm /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b/prebuilt/darwin-x86_64/awk
+          brew install awk
+          ndk-build -v
       - name: Build with Gradle
         run: |
           ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
