@@ -59,9 +59,13 @@ jobs:
         with:
           tag_name: ${{ github.ref_name }}
           files: |
-            android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
-            android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
-            android/ijkplayer/ijkplayer-java/build/outputs/aar/ijkplayer-java-release.aar
+            android/ijkplayer/ijkplayer-armv7a/build/outputs/**
+            android/ijkplayer/ijkplayer-arm64/build/outputs/**
+            android/ijkplayer/ijkplayer-java/build/outputs/**
+        
+            # android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
+            # android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
+            # android/ijkplayer/ijkplayer-java/build/outputs/aar/ijkplayer-java-release.aar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
