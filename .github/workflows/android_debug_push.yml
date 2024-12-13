@@ -59,27 +59,27 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Compress output files
-        run: |
-          cd android/ijkplayer
-          zip -r outputs.zip ijkplayer-armv7a/build/outputs/ ijkplayer-arm64/build/outputs/ ijkplayer-java/build/outputs/
+      # - name: Compress output files
+      #   run: |
+      #     cd android/ijkplayer
+      #     zip -r outputs.zip ijkplayer-armv7a/build/outputs/ ijkplayer-arm64/build/outputs/ ijkplayer-java/build/outputs/
 
-      - name: Upload compressed outputs
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ github.ref_name }}
-          files: outputs.zip
-          
-      # - name: Upload AAR files
+      # - name: Upload compressed outputs
       #   uses: softprops/action-gh-release@v1
       #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     files: |
-      #       android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
-      #       android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
-      #       android/ijkplayer/ijkplayer-java/build/outputs/aar/ijkplayer-java-release.aar
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     tag_name: ${{ github.ref_name }}
+      #     files: outputs.zip
+          
+      - name: Upload AAR files
+        uses: softprops/action-gh-release@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          files: |
+            android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
+            android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
+            android/ijkplayer/ijkplayer-java/build/outputs/aar/ijkplayer-java-release.aar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           
       # - name: AAR Path
