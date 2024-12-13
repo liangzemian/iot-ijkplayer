@@ -13,16 +13,20 @@ env:
 
 jobs:
   build:
-    runs-on: macos-12
+    runs-on: macos-13
     steps:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - run: |
-          gpg -d --passphrase "$GPG_DECRYPT_PASSPHRASE" --batch --quiet .github/android/secring.gpg.asc > android/ijkplayer/secring.gpg
-      - name: Download r10e NDK
+      # - run: |
+      #     gpg -d --passphrase "$GPG_DECRYPT_PASSPHRASE" --batch --quiet .github/android/secring.gpg.asc > android/ijkplayer/secring.gpg
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11    
+      - name: Download r12b NDK
         run: |
-          wget https://dl.google.com/android/repository/android-ndk-r10e-darwin-x86_64.zip
+          wget https://dl.google.com/android/repository/android-ndk-r12b-darwin-x86_64.zip
           unzip android-ndk-r10e-darwin-x86_64.zip
       - name: Update SDK Version
         run: |
@@ -31,25 +35,47 @@ jobs:
           rc=$(git rev-parse --short HEAD)
           cd android/ijkplayer
           sed -i "" 's#def version.*#def version = \"'$rt'\"#g' config.gradle
-      - name: Update Values of Signing
-        run: |
-          export KEY_ID_OF_SIGN=$IOT_GPG_KEYNAME
-          export PASSWORD_OF_SIGN=$IOT_GPG_PASSPHRASE
-          sh .github/script/updateValuesForSign.sh
+      # - name: Update Values of Signing
+      #   run: |
+      #     export KEY_ID_OF_SIGN=$IOT_GPG_KEYNAME
+      #     export PASSWORD_OF_SIGN=$IOT_GPG_PASSPHRASE
+      #     sh .github/script/updateValuesForSign.sh
       - name: Build with Gradle
         run: |
-          ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r10e
-          export ANDROID_NDK=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r10e
-          export ANDROID_NDK_ROOT=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r10e
+          ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
+          export ANDROID_NDK=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
+          export ANDROID_NDK_ROOT=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
           
           sh .github/script/build_armv7a.sh
           cd android/ijkplayer
           ./gradlew :ijkplayer-armv7a:assemble
           ./gradlew :ijkplayer-arm64:assemble
           ./gradlew :ijkplayer-java:assemble
-      - name: Publish aar Maven
+
+      - name: Create Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compress output files
         run: |
           cd android/ijkplayer
-          ./gradlew :ijkplayer-armv7a:publish
-          ./gradlew :ijkplayer-arm64:publish
-          ./gradlew :ijkplayer-java:publish
+          zip -r outputs.zip ijkplayer-armv7a/build/outputs/ ijkplayer-arm64/build/outputs/ ijkplayer-java/build/outputs/
+
+      - name: Upload compressed outputs
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: outputs.zip    
+      # - name: Publish aar Maven
+      #   run: |
+      #     cd android/ijkplayer
+      #     ./gradlew :ijkplayer-armv7a:publish
+      #     ./gradlew :ijkplayer-arm64:publish
+      #     ./gradlew :ijkplayer-java:publish
