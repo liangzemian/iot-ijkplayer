@@ -56,6 +56,10 @@ echo_nextstep_help() {
     echo "--------------------"
     echo "# to continue to build ijkplayer, run script below,"
     echo "sh compile-ijk.sh "
+    echo "打印ffmpeg-armv7a/output"
+    ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android/contrib/build/ffmpeg-armv7a/output
+    echo "打印ffmpeg-arm64/output"
+    ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android/contrib/build/ffmpeg-arm64/output
 }
 
 #----------
