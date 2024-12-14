@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-IJK_FFMPEG_UPSTREAM=git://git.videolan.org/ffmpeg.git
+# IJK_FFMPEG_UPSTREAM=git://git.videolan.org/ffmpeg.git
 IJK_FFMPEG_UPSTREAM=https://github.com/liangzemian/FFmpeg-webrtc.git
 IJK_FFMPEG_FORK=https://github.com/liangzemian/FFmpeg-webrtc.git
 IJK_FFMPEG_COMMIT=ijkplayer
@@ -39,7 +39,8 @@ function pull_fork()
     echo "== pull ffmpeg fork $1 =="
     sh $TOOLS/pull-repo-ref.sh $IJK_FFMPEG_FORK android/contrib/ffmpeg-$1 ${IJK_FFMPEG_LOCAL_REPO}
     cd android/contrib/ffmpeg-$1
-    git checkout ${IJK_FFMPEG_COMMIT} -B ijkplayer
+    # git checkout ${IJK_FFMPEG_COMMIT} -B ijkplayer
+    git checkout -b ${IJK_FFMPEG_COMMIT} origin/ijkplayer
     echo "== Configure FFmpeg =="
     ./configure --enable-libLebConnection --enable-pic --enable-gpl --enable-nonfree --disable-doc --extra-cflags=-I./libLebConnection/include --extra-ldflags=-L./libLebConnection/libs/ --extra-libs=-lLebConnection -lc++_shared
     # ./configure --enable-libLebConnection --enable-pic --enable-gpl --enable-nonfree --disable-doc --extra-cflags=-I./libLebConnection/include --extra-ldflags=-L./libLebConnection/libs/ --extra-libs='-lLebConnection_so -lc++_shared
