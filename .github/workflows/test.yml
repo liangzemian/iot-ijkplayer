@@ -1,0 +1,65 @@
+name: Test
+
+on:
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v3
+        with:
+          distribution: temurin
+          java-version: 11    
+      - name: Build with Gradle
+        run: |
+          ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android/contrib/build/ffmpeg-armv7a/output    
+      # - name: Download r12b NDK
+      #   run: |
+      #     wget https://dl.google.com/android/repository/android-ndk-r12b-darwin-x86_64.zip
+      #     unzip android-ndk-r12b-darwin-x86_64.zip
+      # - name: Update SDK Version
+      #   run: bash .github/script/updateVersionForSnapshot.sh
+      # - name: Update awk
+      #   run: |
+      #     rm /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b/prebuilt/darwin-x86_64/bin/awk
+      #     brew install awk
+      #     # ndk-build -v
+      # - name: Build with Gradle
+      #   run: |
+      #     ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
+      #     export ANDROID_NDK=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
+      #     export ANDROID_NDK_ROOT=/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android-ndk-r12b
+
+      #     sh .github/script/build_armv7a.sh
+      #     cd android/ijkplayer
+      #     ./gradlew :ijkplayer-armv7a:assemble
+      #     ./gradlew :ijkplayer-arm64:assemble
+      #     ./gradlew :ijkplayer-java:assemble
+          
+      # - name: Create Release
+      #   id: create_release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     tag_name: ${{ github.ref_name }}
+      #     name: Release ${{ github.ref_name }}
+      #     draft: false
+      #     prerelease: false
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      # - name: Upload AAR files
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     # upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     tag_name: ${{ github.ref_name }}
+      #     files: |
+      #       android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
+      #       android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
+      #       android/ijkplayer/ijkplayer-java/build/outputs/aar/ijkplayer-java-release.aar
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
