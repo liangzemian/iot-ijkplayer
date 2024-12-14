@@ -41,7 +41,8 @@ function pull_fork()
     cd android/contrib/ffmpeg-$1
     git checkout ${IJK_FFMPEG_COMMIT} -B ijkplayer
     echo "== Configure FFmpeg =="
-    ./configure --enable-libLebConnection --enable-pic --enable-gpl --enable-nonfree --disable-doc --extra-cflags=-I./libLebConnection/include --extra-ldflags=-L./libLebConnection/libs/ --extra-libs='-lLebConnection_so -lc++_shared
+    ./configure --enable-libLebConnection --enable-pic --enable-gpl --enable-nonfree --disable-doc --extra-cflags=-I./libLebConnection/include --extra-ldflags=-L./libLebConnection/libs/ --extra-libs=-lLebConnection -lc++_shared
+    # ./configure --enable-libLebConnection --enable-pic --enable-gpl --enable-nonfree --disable-doc --extra-cflags=-I./libLebConnection/include --extra-ldflags=-L./libLebConnection/libs/ --extra-libs='-lLebConnection_so -lc++_shared
     cd -
 }
 
