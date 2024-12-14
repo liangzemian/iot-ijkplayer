@@ -17,14 +17,14 @@
 #
 
 # IJK_FFMPEG_UPSTREAM=git://git.videolan.org/ffmpeg.git
-IJK_FFMPEG_UPSTREAM=https://github.com/liangzemian/FFmpeg-webrtc.git
-IJK_FFMPEG_FORK=https://github.com/liangzemian/FFmpeg-webrtc.git
-IJK_FFMPEG_COMMIT=ijkplayer
-IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
-# IJK_FFMPEG_UPSTREAM=https://github.com/tonychanchen/FFmpeg.git
-# IJK_FFMPEG_FORK=https://github.com/tonychanchen/FFmpeg.git
-# IJK_FFMPEG_COMMIT=ff4.0--ijk0.8.8--20210205--003
+# IJK_FFMPEG_UPSTREAM=https://github.com/liangzemian/FFmpeg-webrtc.git
+# IJK_FFMPEG_FORK=https://github.com/liangzemian/FFmpeg-webrtc.git
+# IJK_FFMPEG_COMMIT=ijkplayer
 # IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
+IJK_FFMPEG_UPSTREAM=https://github.com/tonychanchen/FFmpeg.git
+IJK_FFMPEG_FORK=https://github.com/tonychanchen/FFmpeg.git
+IJK_FFMPEG_COMMIT=ff4.0--ijk0.8.8--20210205--003
+IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
 
 set -e
 TOOLS=tools
@@ -39,10 +39,10 @@ function pull_fork()
     echo "== pull ffmpeg fork $1 =="
     sh $TOOLS/pull-repo-ref.sh $IJK_FFMPEG_FORK android/contrib/ffmpeg-$1 ${IJK_FFMPEG_LOCAL_REPO}
     cd android/contrib/ffmpeg-$1
-    # git checkout ${IJK_FFMPEG_COMMIT} -B ijkplayer
-    git checkout -b ${IJK_FFMPEG_COMMIT} origin/ijkplayer
-    echo "== Configure FFmpeg =="
-    ./configure --extra-cflags=-I/path/libLebConnection/include --extra-ldflags=-L/path/libLebConnection/lib/ --extra-libs=-lLebConnection_so -lc++_shared
+    git checkout ${IJK_FFMPEG_COMMIT} -B ijkplayer
+    # git checkout -b ${IJK_FFMPEG_COMMIT} origin/ijkplayer
+    # echo "== Configure FFmpeg =="
+    # ./configure --extra-cflags=-I/path/libLebConnection/include --extra-ldflags=-L/path/libLebConnection/lib/ --extra-libs=-lLebConnection_so -lc++_shared
     # ./configure --enable-libLebConnection --enable-pic --enable-gpl --enable-nonfree --disable-doc --extra-cflags=-I/path/libLebConnection/include --extra-ldflags=-L/path/libLebConnection/lib/ --extra-libs=-lLebConnection -lc++_shared
 
     # ./configure --extra-cflags=-I/path/libLebConnection/include --extra-ldflags=-L/path/libLebConnection/lib/ --extra-libs=-lLebConnection -lc++_shared
