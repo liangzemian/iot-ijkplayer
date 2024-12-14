@@ -56,8 +56,19 @@ echo_nextstep_help() {
     echo "--------------------"
     echo "# to continue to build ijkplayer, run script below,"
     echo "sh compile-ijk.sh "
-    echo "复制文件"
-    cp -r /Users/runner/work/iot-ijkplayer/iot-ijkplayer/libLebConnection /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android/contrib/build/
+    SOURCE_DIR="/Users/runner/work/iot-ijkplayer/iot-ijkplayer/libLebConnection/build"
+    DESTINATION_DIR="/Users/runner/work/iot-ijkplayer/iot-ijkplayer/android/contrib"
+    cp -r "$SOURCE_DIR" "$DESTINATION_DIR"
+
+    # 检查复制是否成功
+    if [ $? -eq 0 ]; then
+        echo "文件夹复制成功！"
+    else
+        echo "文件夹复制失败！"
+    fi
+    
+    # echo "复制文件"
+    # cp -r /Users/runner/work/iot-ijkplayer/iot-ijkplayer/libLebConnection /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android/contrib/build/
     echo "打印ffmpeg-armv7a/output"
     ls -l /Users/runner/work/iot-ijkplayer/iot-ijkplayer/android/contrib/build/ffmpeg-armv7a/output
     echo "打印ffmpeg-arm64/output"
