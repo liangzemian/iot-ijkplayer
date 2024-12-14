@@ -42,7 +42,7 @@ function pull_fork()
     # git checkout ${IJK_FFMPEG_COMMIT} -B ijkplayer
     git checkout -b ${IJK_FFMPEG_COMMIT} origin/ijkplayer
     echo "== Configure FFmpeg =="
-    ./configure --extra-cflags=-I/path/libLebConnection/include --extra-ldflags=-L/path/libLebConnection/lib/ --extra-libs='-lLebConnection -lc++_shared
+    ./configure --extra-cflags=-I/path/libLebConnection/include/ --extra-ldflags=-L/path/libLebConnection/lib/arm64 --extra-libs='-lLebConnection -lc++_shared
     # ./configure --enable-libLebConnection --enable-pic --enable-gpl --enable-nonfree --disable-doc --extra-cflags=-I./libLebConnection/include/ --extra-ldflags=-L./libLebConnection/libs/arm64 --extra-libs=-lLebConnection
     # ./configure --enable-libLebConnection --enable-pic --enable-gpl --enable-nonfree --disable-doc --extra-cflags=-I./libLebConnection/include --extra-ldflags=-L./libLebConnection/libs/ --extra-libs=-lLebConnection -lc++_shared
     # ./configure --enable-libLebConnection --enable-pic --enable-gpl --enable-nonfree --disable-doc --extra-cflags=-I./libLebConnection/include --extra-ldflags=-L./libLebConnection/libs/ --extra-libs='-lLebConnection_so -lc++_shared
