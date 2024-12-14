@@ -16,15 +16,15 @@
 # limitations under the License.
 #
 
-# IJK_FFMPEG_UPSTREAM=git://git.videolan.org/ffmpeg.git
-# IJK_FFMPEG_UPSTREAM=https://github.com/liangzemian/FFmpeg-webrtc.git
-# IJK_FFMPEG_FORK=https://github.com/liangzemian/FFmpeg-webrtc.git
-# IJK_FFMPEG_COMMIT=ijkplayer
-# IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
-IJK_FFMPEG_UPSTREAM=https://github.com/tonychanchen/FFmpeg.git
-IJK_FFMPEG_FORK=https://github.com/tonychanchen/FFmpeg.git
-IJK_FFMPEG_COMMIT=ff4.0--ijk0.8.8--20210205--003
+IJK_FFMPEG_UPSTREAM=git://git.videolan.org/ffmpeg.git
+IJK_FFMPEG_UPSTREAM=https://github.com/liangzemian/FFmpeg-webrtc.git
+IJK_FFMPEG_FORK=https://github.com/liangzemian/FFmpeg-webrtc.git
+IJK_FFMPEG_COMMIT=ijkplayer
 IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
+# IJK_FFMPEG_UPSTREAM=https://github.com/tonychanchen/FFmpeg.git
+# IJK_FFMPEG_FORK=https://github.com/tonychanchen/FFmpeg.git
+# IJK_FFMPEG_COMMIT=ff4.0--ijk0.8.8--20210205--003
+# IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
 
 set -e
 TOOLS=tools
