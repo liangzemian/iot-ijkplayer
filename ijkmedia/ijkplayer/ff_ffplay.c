@@ -2958,7 +2958,7 @@ static int stream_component_open(FFPlayer *ffp, int stream_index)
     
    
     //set decoder as low deday
-    avctx->flags |= CODEC_FLAG_LOW_DELAY;
+    // avctx->flags |= CODEC_FLAG_LOW_DELAY;
     
     if (!avctx)
         return AVERROR(ENOMEM);
