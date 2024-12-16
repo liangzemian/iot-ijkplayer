@@ -2956,14 +2956,12 @@ static int stream_component_open(FFPlayer *ffp, int stream_index)
         return -1;
     avctx = avcodec_alloc_context3(NULL);
     
-    if 1
-        //set decoder as low deday
-        avctx->flags |= CODEC_FLAG_LOW_DELAY;
-    endif
-        if (!avctx)
-            return AVERROR(ENOMEM);
-    // if (!avctx)
-    //     return AVERROR(ENOMEM);
+   
+    //set decoder as low deday
+    avctx->flags |= CODEC_FLAG_LOW_DELAY;
+    
+    if (!avctx)
+        return AVERROR(ENOMEM);
 
     ret = avcodec_parameters_to_context(avctx, ic->streams[stream_index]->codecpar);
     if (ret < 0)
