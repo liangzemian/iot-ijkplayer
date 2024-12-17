@@ -101,6 +101,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Commit version update
+        run: |
+          git config --local user.name "GitHub Actions"
+          git config --local user.email "actions@github.com"
+          git add VERSION.txt
+          git commit -m "Update version to ${{ steps.increment_version.outputs.new_version }}"
+          git push
       # - name: AAR Path
       #   run: |
       #     ls -l android/ijkplayer/ijkplayer-armv7a
