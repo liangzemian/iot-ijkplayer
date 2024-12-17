@@ -1,6 +1,7 @@
 name: IOT IJK ANDROID DEBUG CI
 
 on:
+  workflow_dispatch:
   push:
     tags-ignore:
       - '*'
