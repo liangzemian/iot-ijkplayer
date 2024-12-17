@@ -40,7 +40,8 @@ function pull_fork()
     sh $TOOLS/pull-repo-ref.sh $IJK_FFMPEG_FORK android/contrib/ffmpeg-$1 ${IJK_FFMPEG_LOCAL_REPO}
     cd android/contrib/ffmpeg-$1
     # git checkout ${IJK_FFMPEG_COMMIT} -B ijkplayer
-    git checkout -b ${IJK_FFMPEG_COMMIT} origin/ijkplayer
+    git checkout -b ${IJK_FFMPEG_COMMIT} b8767b1
+    # git checkout -b ${IJK_FFMPEG_COMMIT} origin/ijkplayer
     # echo "== Configure FFmpeg =="
     # ./configure --extra-cflags=-I/path/libLebConnection/include --extra-ldflags=-L/path/libLebConnection/lib/ --extra-libs=-lLebConnection_so -lc++_shared
     cd -
