@@ -42,7 +42,8 @@ function pull_fork()
     # git checkout ${IJK_FFMPEG_COMMIT} -B ijkplayer
     # git checkout -b ${IJK_FFMPEG_COMMIT} b8767b1
     git checkout -b ${IJK_FFMPEG_COMMIT} origin/ijkplayer
-    # echo "== Configure FFmpeg =="
+    echo "== Configure FFmpeg =="
+    ./configure --enable-muxer=whip --enable-openssl --enable-version3 --enable-libx264 --enable-gpl --enable-libopus
     # ./configure --extra-cflags=-I/path/libLebConnection/include --extra-ldflags=-L/path/libLebConnection/lib/ --extra-libs=-lLebConnection_so -lc++_shared
     cd -
 }
