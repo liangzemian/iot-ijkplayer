@@ -25,16 +25,16 @@ jobs:
         id: get_version
         run: |
           VERSION=$(cat VERSION.txt)
-          echo "当前版本: $VERSION"
+          echo "Current version: $VERSION"
           echo "version=$VERSION" >> $GITHUB_ENV
 
       - name: Increment Version
         id: increment_version
         run: |
           IFS='.' read -r major minor patch <<< "${{ env.version }}"
-          patch=$((patch + 1))  # 递增补丁版本
+          patch=$((patch + 1))
           new_version="$major.$minor.$patch"
-          echo "新版本: $new_version"
+          echo "New version: $new_version"
           echo "$new_version" > VERSION.txt
           echo "new_version=$new_version" >> $GITHUB_ENV    
       - uses: actions/setup-java@v3
