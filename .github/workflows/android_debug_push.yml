@@ -52,8 +52,10 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
+          # tag_name: ${{ github.ref_name }}
+          # name: Release ${{ github.ref_name }}
+          tag_name: ${{ env.new_version }}
+          name: Release ${{ env.new_version }}
           draft: false
           prerelease: false
         env:
@@ -74,7 +76,8 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           # upload_url: ${{ steps.create_release.outputs.upload_url }}
-          tag_name: ${{ github.ref_name }}
+          # tag_name: ${{ github.ref_name }}
+          tag_name: ${{ env.new_version }}
           files: |
             android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar
             android/ijkplayer/ijkplayer-arm64/build/outputs/aar/ijkplayer-arm64-release.aar
