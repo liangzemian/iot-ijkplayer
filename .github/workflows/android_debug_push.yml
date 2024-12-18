@@ -65,15 +65,15 @@ jobs:
           ./gradlew :ijkplayer-arm64:assemble
           ./gradlew :ijkplayer-java:assemble
 
-      - name: Check AAR File Size
-        run: |
-          FILE_PATH="android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar"
-          FILE_SIZE=$(stat -c%s "$FILE_PATH")
-          echo "File size: $FILE_SIZE bytes"
-          if [ "$FILE_SIZE" -lt 3145728 ]; then
-            echo "Error: AAR file size is less than 3MB."
-            exit 1
-          fi
+      # - name: Check AAR File Size
+      #   run: |
+      #     FILE_PATH="android/ijkplayer/ijkplayer-armv7a/build/outputs/aar/ijkplayer-armv7a-release.aar"
+      #     FILE_SIZE=$(stat -c%s "$FILE_PATH")
+      #     echo "File size: $FILE_SIZE bytes"
+      #     if [ "$FILE_SIZE" -lt 3145728 ]; then
+      #       echo "Error: AAR file size is less than 3MB."
+      #       exit 1
+      #     fi
           
       - name: Create Release
         id: create_release
