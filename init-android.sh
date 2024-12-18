@@ -17,14 +17,18 @@
 #
 
 # IJK_FFMPEG_UPSTREAM=git://git.videolan.org/ffmpeg.git
-IJK_FFMPEG_UPSTREAM=https://github.com/liangzemian/FFmpeg-webrtc.git
-IJK_FFMPEG_FORK=https://github.com/liangzemian/FFmpeg-webrtc.git
-IJK_FFMPEG_COMMIT=ijkplayer
-IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
+# IJK_FFMPEG_UPSTREAM=https://github.com/liangzemian/FFmpeg-webrtc.git
+# IJK_FFMPEG_FORK=https://github.com/liangzemian/FFmpeg-webrtc.git
+# IJK_FFMPEG_COMMIT=ijkplayer
+# IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
 # IJK_FFMPEG_UPSTREAM=https://github.com/tonychanchen/FFmpeg.git
 # IJK_FFMPEG_FORK=https://github.com/tonychanchen/FFmpeg.git
 # IJK_FFMPEG_COMMIT=ff4.0--ijk0.8.8--20210205--003
 # IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
+IJK_FFMPEG_UPSTREAM=https://github.com/liangzemian/ff6.1.1.git
+IJK_FFMPEG_FORK=https://github.com/liangzemian/ff6.1.1.git
+IJK_FFMPEG_COMMIT=ijkplayer
+IJK_FFMPEG_LOCAL_REPO=extra/ffmpeg
 
 set -e
 TOOLS=tools
@@ -41,9 +45,10 @@ function pull_fork()
     cd android/contrib/ffmpeg-$1
     # git checkout ${IJK_FFMPEG_COMMIT} -B ijkplayer
     # git checkout -b ${IJK_FFMPEG_COMMIT} b8767b1
-    git checkout -b ${IJK_FFMPEG_COMMIT} origin/ijkplayer
-    echo "== Configure FFmpeg =="
-    ./configure --enable-muxer=whip --enable-openssl --enable-version3 --enable-libx264 --enable-libopus
+    # git checkout -b ${IJK_FFMPEG_COMMIT} origin/ijkplayer
+    git checkout -b ${IJK_FFMPEG_COMMIT} origin/ff6.1.1--ijk0.8.8
+    # echo "== Configure FFmpeg =="
+    # ./configure --enable-muxer=whip --enable-openssl --enable-version3 --enable-libx264 --enable-libopus
     # ./configure --enable-muxer=whip --enable-openssl --enable-version3 --enable-libx264 --enable-gpl --enable-libopus --enable-nonfree
     # ./configure --enable-muxer=whip --enable-openssl --enable-version3 --enable-libx264 --enable-gpl --enable-libopus
     # ./configure --extra-cflags=-I/path/libLebConnection/include --extra-ldflags=-L/path/libLebConnection/lib/ --extra-libs=-lLebConnection_so -lc++_shared
